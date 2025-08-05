@@ -1,0 +1,46 @@
+name: Zip Creator
+
+on:
+  push:
+
+jobs:
+  create-zip:
+    name: Build and Create Downloadable Zip
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install archive tools
+        run: sudo apt install zip
+
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Bundle files
+        run: |
+          mkdir -p ./temp/mnr_sitanywhere
+          mkdir -p ./temp/mnr_sitanywhere/locales/
+          cp ./fxmanifest.lua ./temp/mnr_sitanywhere
+          cp ./{locales/en.json,locales/fr.json} ./temp/mnr_sitanywhere/locales
+          cp -r ./{bridge,client,config,server} ./temp/mnr_sitanywhere
+          cd ./temp && zip -r ../mnr_sitanywhere.zip ./mnr_sitanywhere
+
+      - name: Create Release
+        uses: 'marvinpinto/action-automatic-releases@v1.2.1'
+        with:
+          automatic_release_tag: "latest"
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          title: 'Ready to download'
+          prerelease: true
+          files: mnr_sitanywhere.zip
+        env:
+          CI: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: StarlingCityDevelopment/resources
+          event-type: update-resources
