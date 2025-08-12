@@ -1,25 +1,27 @@
----@description TEST WIP
-
+local models = lib.load('config.config')
 local occupied = {}
 
-RegisterNetEvent('mnr_sitanywhere:server:Occupy', function(netId, seatIndex)
-    local src = source
+lib.callback.register('mnr_sitanywhere:server:Occupy', function(source, netId, seat)
     local entity = NetworkGetEntityFromNetworkId(netId)
-    if entity == 0 then return end
+    if entity == 0 then
+        return false
+    end
 
     occupied[entity] = occupied[entity] or {}
-    occupied[entity][seatIndex] = src
+    occupied[entity][seat] = src
+
+    return true
 end)
 
-RegisterNetEvent('mnr_sitanywhere:server:Free', function(netId, seatIndex)
+RegisterNetEvent('mnr_sitanywhere:server:Free', function(netId, seat)
     local src = source
     local entity = NetworkGetEntityFromNetworkId(netId)
     if entity == 0 then return end
     
     if not occupied[entity] then return end
-    if occupied[entity][seatIndex] ~= src then return end
+    if occupied[entity][seat] ~= src then return end
 
-    occupied[entity][seatIndex] = nil
+    occupied[entity][seat] = nil
     
     if next(occupied[entity]) then return end
     
@@ -44,27 +46,4 @@ lib.callback.register('mnr_sitanywhere:server:GetFree', function(source, netId)
     end
     
     return false
-end)
-
----@description OLD PART (WIP MEANWHILE COMPAT)
-
-RegisterNetEvent('mnr_sitanywhere:server:ModelRegistration', function(entityNetID, seat)
-    local entity = NetworkGetEntityFromNetworkId(entityNetID)
-    seat = math.max(seat, 0)
-    if seat == 0 then
-        occupied[entity] = nil
-        TriggerClientEvent('mnr_sitanywhere:client:Unregister', -1, entityNetID)
-    else
-        occupied[entity] = seat
-    end
-end)
-
-lib.callback.register('mnr_sitanywhere:server:GetModelSeats', function(source, entityNetID)
-    local entity = NetworkGetEntityFromNetworkId(entityNetID)
-
-    if not occupied[entity] then
-        return 0
-    else
-        return occupied[entity]
-    end
 end)

@@ -1,10 +1,11 @@
 local state = {}
-state._index = state
+state.__index = state
 
 function state:init()
     self.sitting = false
     self.entity = false
-    self.clonedEntity = false
+    self.clone = false
+    self.original = false
 end
 
 function state:set(key, value)

@@ -20,12 +20,13 @@ local function cloneChair(entity)
     SetEntityHeading(clone, heading)
     FreezeEntityPosition(clone, true)
     SetEntityVisible(entity, false, false)
-    state:set('clonedEntity', clone)
+    state:set('original', entity)
+    state:set('clone', clone)
     
     return true, clone
 end
 
-local function networkChair(entity, action)
+local function networkChair(entity)
     if not entity then
         return false, nil
     end
@@ -54,7 +55,7 @@ local function occupied(entity)
     return seat
 end
 
-local function RotateOffset(offset, heading)
+local function rotateOffset(offset, heading)
     local rad = math.rad(heading)
     local cosH = math.cos(rad)
     local sinH = math.sin(rad)
@@ -65,28 +66,23 @@ local function RotateOffset(offset, heading)
     return vec3(newX, newY, offset.z)
 end
 
-local function PlaySit(entity, seatID)
+local function playSit(entity, seat)
     state:set('sitting', true)
     state:set('entity', entity)
 
-    local entityNetID = NetworkGetNetworkIdFromEntity(entity)
-    TriggerServerEvent('mnr_sitanywhere:server:ModelRegistration', entityNetID, seatID)
-
-    local playerPed = cache.ped or PlayerPedId()
-    local modelHash = GetEntityModel(entity)
-    local modelData = models[modelHash]
-
+    local netId = NetworkGetNetworkIdFromEntity(entity)
+    local hash = GetEntityModel(entity)
+    local modelData = models[hash]
     local entityCoords = GetEntityCoords(entity)
     local entityHeading = GetEntityHeading(entity)
-    local seatOffset = modelData.seats[seatID]
-    local rotatedOffset = RotateOffset(seatOffset, entityHeading)
+    local seatOffset = modelData.seats[seat]
+    local rotatedOffset = rotateOffset(seatOffset, entityHeading)
     local position = entityCoords + rotatedOffset
     local heading = entityHeading + seatOffset.w
-    SetEntityCoords(playerPed, position.x, position.y, position.z, true, false, false, false)
+    SetEntityCoords(cache.ped, position.x, position.y, position.z, true, false, false, false)
 
-    if modelData.anim.scenario then
-        TaskStartScenarioAtPosition(playerPed, modelData.anim.scenario, position.x, position.y, position.z, heading, 0, true, true)
-    end
+    if not modelData.anim.scenario then return end
+    TaskStartScenarioAtPosition(cache.ped, modelData.anim.scenario, position.x, position.y, position.z, heading, 0, true, true)
 
     local getup = lib.addKeybind({
         name = 'get-up',
@@ -95,12 +91,11 @@ local function PlaySit(entity, seatID)
         disabled = true,
         onReleased = function(self)
             lib.hideTextUI()
-            ClearPedTasks(playerPed)
-            seatID -= 1
-            TriggerServerEvent('mnr_sitanywhere:server:ModelRegistration', entityNetID, seatID)
+            ClearPedTasks(cache.ped)
+            TriggerServerEvent('mnr_sitanywhere:server:Free', netId, seat)
             self:disable(true)
             state:set('sitting', false)
-            state:set('entity', 0)
+            state:set('entity', false)
         end
     })
 
@@ -112,7 +107,7 @@ RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
     if not data.entity or data.entity == 0 then return end
     if state.sitting == true or state.entity or state.entity == data.entity then return end
 
-    local success, entity, cloned = networkChair(data.entity, 'register')
+    local success, entity, cloned = networkChair(data.entity)
     if not success then return end
 
     local seat = occupied(entity)
@@ -121,19 +116,24 @@ RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
         return
     end
 
-    PlaySit(entity, seatID)
+    local netId = NetworkGetNetworkIdFromEntity(entity)
+    local taken = lib.callback.await('mnr_sitanywhere:server:Occupy', false, netId, seat)
+    if not taken then return end
+
+    playSit(entity, seat)
 end)
 
 RegisterNetEvent('mnr_sitanywhere:client:Unregister', function(netId)
     if GetInvokingResource() then return end
 
-    if state.clonedEntity then
+    local entity = NetworkGetEntityFromNetworkId(netId)
+    if state.clone then
         SetEntityAsNoLongerNeeded(entity)
-        SetEntityVisible(state.entity, true, false)
+        SetEntityVisible(state.original, true, false)
         NetworkUnregisterNetworkedEntity(entity)
         DeleteEntity(entity)
-        
-        state:set('clonedEntity', 0)
+        state:set('original', false)
+        state:set('clone', false)
     else
         NetworkUnregisterNetworkedEntity(entity)
     end
