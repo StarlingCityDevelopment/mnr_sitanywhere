@@ -3,8 +3,8 @@ state._index = state
 
 function state:init()
     self.sitting = false
-    self.entity = 0
-    self.clonedEntity = 0
+    self.entity = false
+    self.clonedEntity = false
 end
 
 function state:set(key, value)

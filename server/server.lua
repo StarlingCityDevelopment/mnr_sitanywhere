@@ -27,15 +27,17 @@ RegisterNetEvent('mnr_sitanywhere:server:Free', function(netId, seatIndex)
     TriggerClientEvent('mnr_sitanywhere:client:Unregister', src, netId)
 end)
 
-lib.callback.register('mnr_sitanywhere:server:GetFree', function(source, netId, maxSeats)
+lib.callback.register('mnr_sitanywhere:server:GetFree', function(source, netId)
     local entity = NetworkGetEntityFromNetworkId(netId)
     if entity == 0 then
         return false
     end
 
+    local hash = GetEntityModel(entity)
+    local max = models[hash].maxSeats
     occupied[entity] = occupied[entity] or {}
     
-    for i = 1, maxSeats do
+    for i = 1, max do
         if not occupied[entity][i] then
             return i
         end

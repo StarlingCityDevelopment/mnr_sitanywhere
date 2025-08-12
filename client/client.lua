@@ -1,89 +1,57 @@
 local models = lib.load('config.config')
 local state = require 'client.state'
 
-local function CloneAndNetworkEntity(entity)
+local function cloneChair(entity)
     if not DoesEntityExist(entity) then
-        return nil, nil
+        return false, false
     end
 
-    local modelHash = GetEntityModel(entity)
-    lib.requestModel(modelHash)
+    local hash = GetEntityModel(entity)
+    lib.requestModel(hash)
 
-    local entityCoords = GetEntityCoords(entity)
-    local entityHeading = GetEntityHeading(entity)
-    local clonedEntity = CreateObject(modelHash, entityCoords.x, entityCoords.y, entityCoords.z, true, true, false)
-    if not DoesEntityExist(clonedEntity) then
-        return nil, nil
+    local coords = GetEntityCoords(entity)
+    local heading = GetEntityHeading(entity)
+    local clone = CreateObject(hash, coords.x, coords.y, coords.z, true, true, false)
+
+    if not DoesEntityExist(clone) then
+        return false, false
     end
 
-    SetEntityHeading(clonedEntity, entityHeading)
-    FreezeEntityPosition(clonedEntity, true)
-
-    NetworkRegisterEntityAsNetworked(clonedEntity)
-
+    SetEntityHeading(clone, heading)
+    FreezeEntityPosition(clone, true)
     SetEntityVisible(entity, false, false)
-
-    state:set('clonedEntity', clonedEntity)
-    return clonedEntity
+    state:set('clonedEntity', clone)
+    
+    return true, clone
 end
 
-local function NetworkChair(entity, action)
+local function networkChair(entity, action)
     if not entity then
         return false, nil
     end
 
-    if action == 'register' then
-        local isLocal = NetworkGetEntityIsLocal(entity)
-        if isLocal then
-            NetworkRegisterEntityAsNetworked(entity)
-        end
-
-        Wait(100)
-
-        local isNetworked = NetworkGetEntityIsNetworked(entity)
-        if isNetworked then
-            return true, entity
-        else
-            local clonedEntity = CloneAndNetworkEntity(entity)
-            if clonedEntity then
-                return true, clonedEntity
-            else
-                return false, nil
-            end
-        end
+    local isLocal = NetworkGetEntityIsLocal(entity)
+    if isLocal then
+        NetworkRegisterEntityAsNetworked(entity)
     end
 
-    if action == 'unregister' then
-        if state.clonedEntity ~= 0 then
-            SetEntityAsNoLongerNeeded(entity)
-            SetEntityVisible(state.entity, true, false)
-            NetworkUnregisterNetworkedEntity(entity)
-            DeleteEntity(entity)
-            
-            state:set('clonedEntity', 0)
-        else
-            NetworkUnregisterNetworkedEntity(entity)
-        end
+    Wait(100)
+
+    local networked = NetworkGetEntityIsNetworked(entity)
+    if networked then
+        return true, entity, false
+    else
+        local success, clone = cloneChair(entity)
+        
+        return success, clone, true
     end
 end
 
-local function IsSeatOccupied(entity)
-    local modelHash = GetEntityModel(entity)
-    local modelData = models[modelHash]
-    if not modelData then return end
+local function occupied(entity)
+    local netId = NetworkGetNetworkIdFromEntity(entity)
+    local seat = lib.callback.await('mnr_sitanywhere:server:GetFree', 200, netId)
 
-    local entityNetID = NetworkGetNetworkIdFromEntity(entity)
-    local seats = lib.callback.await('mnr_sitanywhere:server:GetModelSeats', 200, entityNetID)
-
-    if seats == 0 then
-        return false, 1
-    end
-
-    if seats == modelData.maxSeats then
-        return true, false
-    else
-        return false, seats + 1
-    end
+    return seat
 end
 
 local function RotateOffset(offset, heading)
@@ -130,9 +98,6 @@ local function PlaySit(entity, seatID)
             ClearPedTasks(playerPed)
             seatID -= 1
             TriggerServerEvent('mnr_sitanywhere:server:ModelRegistration', entityNetID, seatID)
-            if seatID == 0 then
-                NetworkChair(entity, 'unregister')
-            end
             self:disable(true)
             state:set('sitting', false)
             state:set('entity', 0)
@@ -144,20 +109,35 @@ local function PlaySit(entity, seatID)
 end
 
 RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
-    if not data.entity then return end
-    if state.sitting == true and state.entity ~= 0 or state.entity == data.entity then return end
+    if not data.entity or data.entity == 0 then return end
+    if state.sitting == true or state.entity or state.entity == data.entity then return end
 
-    local networkSuccess, entity = NetworkChair(data.entity, 'register')
-    if not networkSuccess then return end
+    local success, entity, cloned = networkChair(data.entity, 'register')
+    if not success then return end
 
-    local seatOccupied, seatID = IsSeatOccupied(entity)
-    if seatOccupied then
-        return client.Notify(locale('notify.seat-occupied'), 'error')
+    local seat = occupied(entity)
+    if not seat then
+        client.Notify(locale('notify.seat-occupied'), 'error')
+        return
     end
 
     PlaySit(entity, seatID)
 end)
 
+RegisterNetEvent('mnr_sitanywhere:client:Unregister', function(netId)
+    if GetInvokingResource() then return end
+
+    if state.clonedEntity then
+        SetEntityAsNoLongerNeeded(entity)
+        SetEntityVisible(state.entity, true, false)
+        NetworkUnregisterNetworkedEntity(entity)
+        DeleteEntity(entity)
+        
+        state:set('clonedEntity', 0)
+    else
+        NetworkUnregisterNetworkedEntity(entity)
+    end
+end)
 
 local targetModels = {}
 
