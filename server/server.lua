@@ -41,7 +41,7 @@ lib.callback.register('mnr_sitanywhere:server:GetFree', function(source, netId, 
         end
     end
     
-    return nil
+    return false
 end)
 
 ---@description OLD PART (WIP MEANWHILE COMPAT)
