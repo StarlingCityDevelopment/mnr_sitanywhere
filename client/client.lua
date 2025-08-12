@@ -1,5 +1,5 @@
-local models = lib.load("config.config")
-local state = require "client.state"
+local models = lib.load('config.config')
+local state = require 'client.state'
 
 local function CloneAndNetworkEntity(entity)
     if not DoesEntityExist(entity) then
@@ -23,7 +23,7 @@ local function CloneAndNetworkEntity(entity)
 
     SetEntityVisible(entity, false, false)
 
-    state:set("clonedEntity", clonedEntity)
+    state:set('clonedEntity', clonedEntity)
     return clonedEntity
 end
 
@@ -32,7 +32,7 @@ local function NetworkChair(entity, action)
         return false, nil
     end
 
-    if action == "register" then
+    if action == 'register' then
         local isLocal = NetworkGetEntityIsLocal(entity)
         if isLocal then
             NetworkRegisterEntityAsNetworked(entity)
@@ -53,14 +53,14 @@ local function NetworkChair(entity, action)
         end
     end
 
-    if action == "unregister" then
+    if action == 'unregister' then
         if state.clonedEntity ~= 0 then
             SetEntityAsNoLongerNeeded(entity)
             SetEntityVisible(state.entity, true, false)
             NetworkUnregisterNetworkedEntity(entity)
             DeleteEntity(entity)
             
-            state:set("clonedEntity", 0)
+            state:set('clonedEntity', 0)
         else
             NetworkUnregisterNetworkedEntity(entity)
         end
@@ -73,7 +73,7 @@ local function IsSeatOccupied(entity)
     if not modelData then return end
 
     local entityNetID = NetworkGetNetworkIdFromEntity(entity)
-    local seats = lib.callback.await("mnr_sitanywhere:server:GetModelSeats", 200, entityNetID)
+    local seats = lib.callback.await('mnr_sitanywhere:server:GetModelSeats', 200, entityNetID)
 
     if seats == 0 then
         return false, 1
@@ -98,11 +98,11 @@ local function RotateOffset(offset, heading)
 end
 
 local function PlaySit(entity, seatID)
-    state:set("sitting", true)
-    state:set("entity", entity)
+    state:set('sitting', true)
+    state:set('entity', entity)
 
     local entityNetID = NetworkGetNetworkIdFromEntity(entity)
-    TriggerServerEvent("mnr_sitanywhere:server:ModelRegistration", entityNetID, seatID)
+    TriggerServerEvent('mnr_sitanywhere:server:ModelRegistration', entityNetID, seatID)
 
     local playerPed = cache.ped or PlayerPedId()
     local modelHash = GetEntityModel(entity)
@@ -121,38 +121,38 @@ local function PlaySit(entity, seatID)
     end
 
     local getup = lib.addKeybind({
-        name = "get-up",
-        description = "Used for get up from a seat",
-        defaultKey = "E",
+        name = 'get-up',
+        description = 'Used for get up from a seat',
+        defaultKey = 'E',
         disabled = true,
         onReleased = function(self)
             lib.hideTextUI()
             ClearPedTasks(playerPed)
             seatID -= 1
-            TriggerServerEvent("mnr_sitanywhere:server:ModelRegistration", entityNetID, seatID)
+            TriggerServerEvent('mnr_sitanywhere:server:ModelRegistration', entityNetID, seatID)
             if seatID == 0 then
-                NetworkChair(entity, "unregister")
+                NetworkChair(entity, 'unregister')
             end
             self:disable(true)
-            state:set("sitting", false)
-            state:set("entity", 0)
+            state:set('sitting', false)
+            state:set('entity', 0)
         end
     })
 
-    lib.showTextUI(locale("textui.sit"))
+    lib.showTextUI(locale('textui.sit'))
     getup:disable(false)
 end
 
-RegisterNetEvent("mnr_sitanywhere:client:Sit", function(data)
+RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
     if not data.entity then return end
     if state.sitting == true and state.entity ~= 0 or state.entity == data.entity then return end
 
-    local networkSuccess, entity = NetworkChair(data.entity, "register")
+    local networkSuccess, entity = NetworkChair(data.entity, 'register')
     if not networkSuccess then return end
 
     local seatOccupied, seatID = IsSeatOccupied(entity)
     if seatOccupied then
-        return client.Notify(locale("notify.seat-occupied"), "error")
+        return client.Notify(locale('notify.seat-occupied'), 'error')
     end
 
     PlaySit(entity, seatID)
