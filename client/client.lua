@@ -97,6 +97,10 @@ local function playSit(entity, seat)
             ClearPedTasks(cache.ped)
             state:set('sitting', false)
             state:set('entity', false)
+            if state.original then
+                SetEntityVisible(state.original, true, false)
+                state:set('original', false)
+            end
         end
     })
 
@@ -128,9 +132,11 @@ RegisterNetEvent('mnr_sitanywhere:client:Unregister', function(netId)
     if GetInvokingResource() then return end
 
     local entity = NetworkGetEntityFromNetworkId(netId)
-    if state.clone then
+    if state.clone and state.clone == entity then
+        ---@todo TEST STATEMENT WORKING
+        print(('[CLONE DELETION] Sees it as clone (%d) and equal to state.clone (%d)'):format(entity, state.clone))
+
         SetEntityAsNoLongerNeeded(entity)
-        SetEntityVisible(state.original, true, false)
         NetworkUnregisterNetworkedEntity(entity)
         DeleteEntity(entity)
         state:set('original', false)
@@ -138,6 +144,9 @@ RegisterNetEvent('mnr_sitanywhere:client:Unregister', function(netId)
     else
         NetworkUnregisterNetworkedEntity(entity)
     end
+
+    ---@todo TEST EFFECTIVE DELETION
+    print(DoesEntityExist(entity))
 end)
 
 local targetModels = {}
