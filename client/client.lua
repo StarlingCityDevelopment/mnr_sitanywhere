@@ -84,27 +84,27 @@ local function playSit(entity, seat)
     if not modelData.anim.scenario then return end
     TaskStartScenarioAtPosition(cache.ped, modelData.anim.scenario, position.x, position.y, position.z, heading, 0, true, true)
 
-    local getup = lib.addKeybind({
-        name = 'get-up',
+    local keybind = lib.addKeybind({
+        name = 'mnr_sitanywhere:keybind:get_up',
         description = 'Used for get up from a seat',
         defaultKey = 'E',
         disabled = true,
         onReleased = function(self)
-            lib.hideTextUI()
-            ClearPedTasks(cache.ped)
             TriggerServerEvent('mnr_sitanywhere:server:Free', netId, seat)
+            lib.hideTextUI()
             self:disable(true)
+            ClearPedTasks(cache.ped)
             state:set('sitting', false)
             state:set('entity', false)
         end
     })
 
     lib.showTextUI(locale('textui.sit'))
-    getup:disable(false)
+    keybind:disable(false)
 end
 
 RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
-    if not data.entity or data.entity == 0 then return end
+    if not DoesEntityExist(data.entity) or GetEntityHealth(data.entity) < 500 then return end
     if state.sitting == true or state.entity or state.entity == data.entity then return end
 
     local success, entity, cloned = networkChair(data.entity)
