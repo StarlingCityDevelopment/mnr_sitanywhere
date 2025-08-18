@@ -49,8 +49,9 @@ local function networkChair(entity)
 end
 
 local function occupied(entity)
+    local hash = GetEntityModel(entity)
     local netId = NetworkGetNetworkIdFromEntity(entity)
-    local seat = lib.callback.await('mnr_sitanywhere:server:GetFree', 200, netId)
+    local seat = lib.callback.await('mnr_sitanywhere:server:GetFree', 200, netId, hash)
 
     return seat
 end
