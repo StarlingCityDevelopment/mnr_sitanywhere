@@ -12,7 +12,7 @@ function target.AddModels(models)
             icon = 'fa-solid fa-chair',
             distance = 2.0,
             canInteract = function(entity)
-                return DoesEntityExist(entity) and GetEntityHealth(entity) > 500 and not cache.vehicle
+                return DoesEntityExist(entity) and not cache.vehicle
             end,
             onSelect = function(data)
                 TriggerEvent('mnr_sitanywhere:client:Sit', data)

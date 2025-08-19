@@ -22,7 +22,7 @@ local function cloneChair(entity)
     SetEntityVisible(entity, false, false)
     state:set('original', entity)
     state:set('clone', clone)
-    
+
     return true, clone
 end
 
@@ -43,7 +43,7 @@ local function networkChair(entity)
         return true, entity, false
     else
         local success, clone = cloneChair(entity)
-        
+
         return success, clone, true
     end
 end
@@ -74,9 +74,9 @@ local function playSit(entity, seat)
     local netId = NetworkGetNetworkIdFromEntity(entity)
     local hash = GetEntityModel(entity)
     local modelData = models[hash]
+    local seatOffset = modelData.seats[seat]
     local entityCoords = GetEntityCoords(entity)
     local entityHeading = GetEntityHeading(entity)
-    local seatOffset = modelData.seats[seat]
     local rotatedOffset = rotateOffset(seatOffset, entityHeading)
     local position = entityCoords + rotatedOffset
     local heading = entityHeading + seatOffset.w
@@ -109,7 +109,7 @@ local function playSit(entity, seat)
 end
 
 RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
-    if not DoesEntityExist(data.entity) or GetEntityHealth(data.entity) < 500 then return end
+    if not DoesEntityExist(data.entity) then return end
     if state.sitting == true or state.entity or state.entity == data.entity then return end
 
     local success, entity, cloned = networkChair(data.entity)
@@ -133,9 +133,6 @@ RegisterNetEvent('mnr_sitanywhere:client:Unregister', function(netId)
 
     local entity = NetworkGetEntityFromNetworkId(netId)
     if state.clone and state.clone == entity then
-        ---@todo TEST STATEMENT WORKING
-        print(('[CLONE DELETION] Sees it as clone (%d) and equal to state.clone (%d)'):format(entity, state.clone))
-
         SetEntityAsNoLongerNeeded(entity)
         NetworkUnregisterNetworkedEntity(entity)
         DeleteEntity(entity)
@@ -144,9 +141,6 @@ RegisterNetEvent('mnr_sitanywhere:client:Unregister', function(netId)
     else
         NetworkUnregisterNetworkedEntity(entity)
     end
-
-    ---@todo TEST EFFECTIVE DELETION
-    print(DoesEntityExist(entity))
 end)
 
 local targetModels = {}

@@ -8,7 +8,7 @@ lib.callback.register('mnr_sitanywhere:server:Occupy', function(source, netId, s
     end
 
     occupied[entity] = occupied[entity] or {}
-    occupied[entity][seat] = src
+    occupied[entity][seat] = source
 
     return true
 end)
@@ -18,11 +18,10 @@ RegisterNetEvent('mnr_sitanywhere:server:Free', function(netId, seat)
     local entity = NetworkGetEntityFromNetworkId(netId)
     if not DoesEntityExist(entity) then return end
 
-    if not occupied[entity] then return end
+    if not occupied[entity][seat] then return end
     if occupied[entity][seat] ~= src then return end
 
     occupied[entity][seat] = nil
-
     if next(occupied[entity]) then return end
 
     occupied[entity] = nil
