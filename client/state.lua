@@ -3,7 +3,7 @@ state.__index = state
 
 function state:init()
     self.sitting = false
-    self.entity = false
+    self.entity = 0
     self.clone = false
     self.original = false
 end

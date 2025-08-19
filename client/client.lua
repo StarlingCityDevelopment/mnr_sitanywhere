@@ -96,7 +96,7 @@ local function playSit(entity, seat)
             self:disable(true)
             ClearPedTasks(cache.ped)
             state:set('sitting', false)
-            state:set('entity', false)
+            state:set('entity', 0)
             if state.original then
                 SetEntityVisible(state.original, true, false)
                 state:set('original', false)
@@ -109,11 +109,18 @@ local function playSit(entity, seat)
 end
 
 RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
-    if not DoesEntityExist(data.entity) then return end
-    if state.sitting == true or state.entity or state.entity == data.entity then return end
+    if not DoesEntityExist(data.entity) then
+        return
+    end
+    
+    if state.sitting or state.entity == data.entity then
+        return
+    end
 
     local success, entity, cloned = networkChair(data.entity)
-    if not success then return end
+    if not success then
+        return
+    end
 
     local seat = occupied(entity)
     if not seat then
@@ -123,7 +130,9 @@ RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
 
     local netId = NetworkGetNetworkIdFromEntity(entity)
     local taken = lib.callback.await('mnr_sitanywhere:server:Occupy', false, netId, seat)
-    if not taken then return end
+    if not taken then
+        return
+    end
 
     playSit(entity, seat)
 end)
