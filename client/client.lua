@@ -75,7 +75,7 @@ local function execAction(action, coords, heading)
     if actionData.type == 'scenario' then
         TaskStartScenarioAtPosition(cache.ped, actionData.scenario, coords.x, coords.y, coords.z, heading, 0, true, true)
     elseif actionData.type == 'anim' then
-        ---@todo Anim execution
+        --TaskPlayAnim(cache.ped, actionData.dict, actionData.name, 1.0, 1.0, 1, 1, 1.0, false, false, false)
     end
 end
 
