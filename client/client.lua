@@ -1,4 +1,5 @@
 local models = lib.load('config.config')
+local actions = lib.load('config.actions')
 local state = require 'client.state'
 
 local function cloneChair(entity)
@@ -67,6 +68,17 @@ local function rotateOffset(offset, heading)
     return vec3(newX, newY, offset.z)
 end
 
+local function execAction(action, coords, heading)
+    SetEntityCoords(cache.ped, coords.x, coords.y, coords.z, true, false, false, false)
+    
+    local actionData = actions[action]
+    if actionData.type == 'scenario' then
+        TaskStartScenarioAtPosition(cache.ped, actionData.scenario, coords.x, coords.y, coords.z, heading, 0, true, true)
+    elseif actionData.type == 'anim' then
+        ---@todo Anim execution
+    end
+end
+
 local function playSit(entity, seat)
     local netId = NetworkGetNetworkIdFromEntity(entity)
     local taken = lib.callback.await('mnr_sitanywhere:server:Occupy', false, netId, seat)
@@ -86,12 +98,8 @@ local function playSit(entity, seat)
     local coords = seatCoords + rotatedOffset
     local heading = seatHeading + seatOffset.w
 
-    if not model.scenario then 
-        return
-    end
-
-    SetEntityCoords(cache.ped, coords.x, coords.y, coords.z, true, false, false, false)
-    TaskStartScenarioAtPosition(cache.ped, model.scenario, coords.x, coords.y, coords.z, heading, 0, true, true)
+    if not model.action then return end
+    execAction(model.action, coords, heading)
 
     local keybind = lib.addKeybind({
         name = 'mnr_sitanywhere:keybind:get_up',
