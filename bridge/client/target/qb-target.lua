@@ -18,6 +18,6 @@ function target.AddModels(models)
                 end,
             }
         },
-        distance = 2.0,
+        distance = 3.0,
     })
 end

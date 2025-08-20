@@ -10,7 +10,7 @@ function target.AddModels(models)
             label = locale('target.sit'),
             name = 'mnr_sitanywhere:sit',
             icon = 'fa-solid fa-chair',
-            distance = 2.0,
+            distance = 3.0,
             canInteract = function(entity)
                 return DoesEntityExist(entity) and not cache.vehicle
             end,

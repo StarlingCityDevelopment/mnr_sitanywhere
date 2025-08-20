@@ -68,22 +68,30 @@ local function rotateOffset(offset, heading)
 end
 
 local function playSit(entity, seat)
+    local netId = NetworkGetNetworkIdFromEntity(entity)
+    local taken = lib.callback.await('mnr_sitanywhere:server:Occupy', false, netId, seat)
+    if not taken then
+        return
+    end
+
     state:set('sitting', true)
     state:set('entity', entity)
 
-    local netId = NetworkGetNetworkIdFromEntity(entity)
     local hash = GetEntityModel(entity)
-    local modelData = models[hash]
-    local seatOffset = modelData.seats[seat]
-    local entityCoords = GetEntityCoords(entity)
-    local entityHeading = GetEntityHeading(entity)
-    local rotatedOffset = rotateOffset(seatOffset, entityHeading)
-    local position = entityCoords + rotatedOffset
-    local heading = entityHeading + seatOffset.w
-    SetEntityCoords(cache.ped, position.x, position.y, position.z, true, false, false, false)
+    local model = models[hash]
+    local seatOffset = model.seats[seat]
+    local seatCoords = GetEntityCoords(entity)
+    local seatHeading = GetEntityHeading(entity)
+    local rotatedOffset = rotateOffset(seatOffset, seatHeading)
+    local coords = seatCoords + rotatedOffset
+    local heading = seatHeading + seatOffset.w
 
-    if not modelData.anim.scenario then return end
-    TaskStartScenarioAtPosition(cache.ped, modelData.anim.scenario, position.x, position.y, position.z, heading, 0, true, true)
+    if not model.scenario then 
+        return
+    end
+
+    SetEntityCoords(cache.ped, coords.x, coords.y, coords.z, true, false, false, false)
+    TaskStartScenarioAtPosition(cache.ped, model.scenario, coords.x, coords.y, coords.z, heading, 0, true, true)
 
     local keybind = lib.addKeybind({
         name = 'mnr_sitanywhere:keybind:get_up',
@@ -128,12 +136,6 @@ RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
         return
     end
 
-    local netId = NetworkGetNetworkIdFromEntity(entity)
-    local taken = lib.callback.await('mnr_sitanywhere:server:Occupy', false, netId, seat)
-    if not taken then
-        return
-    end
-
     playSit(entity, seat)
 end)
 
@@ -154,8 +156,8 @@ end)
 
 local targetModels = {}
 
-for model in pairs(models) do
-    targetModels[#targetModels+1] = model
+for targetModel in pairs(models) do
+    targetModels[#targetModels+1] = targetModel
 end
 
 target.AddModels(targetModels)
