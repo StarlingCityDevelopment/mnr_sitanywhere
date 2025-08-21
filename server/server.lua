@@ -16,13 +16,22 @@ end)
 RegisterNetEvent('mnr_sitanywhere:server:Free', function(netId, seat)
     local src = source
     local entity = NetworkGetEntityFromNetworkId(netId)
-    if not DoesEntityExist(entity) then return end
+    if not DoesEntityExist(entity) then
+        return
+    end
 
-    if not occupied[entity][seat] then return end
-    if occupied[entity][seat] ~= src then return end
+    if not occupied[entity][seat] then
+        return
+    end
+
+    if occupied[entity][seat] ~= src then
+        return
+    end
 
     occupied[entity][seat] = nil
-    if next(occupied[entity]) then return end
+    if next(occupied[entity]) then
+        return
+    end
 
     occupied[entity] = nil
     TriggerClientEvent('mnr_sitanywhere:client:Unregister', src, netId)
