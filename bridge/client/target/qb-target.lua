@@ -11,7 +11,7 @@ function target.AddModels(models)
                 label = locale('target.sit'),
                 icon = 'fa-solid fa-chair',
                 canInteract = function(entity)
-                    return DoesEntityExist(entity) and GetEntityHealth(entity) > 500 and not cache.vehicle
+                    return DoesEntityExist(entity) and not cache.vehicle
                 end,
                 action = function(entity)
                     TriggerEvent('mnr_sitanywhere:client:Sit', { entity = entity })
