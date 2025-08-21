@@ -75,7 +75,9 @@ local function execAction(action, coords, heading)
     if actionData.type == 'scenario' then
         TaskStartScenarioAtPosition(cache.ped, actionData.scenario, coords.x, coords.y, coords.z, heading, 0, true, true)
     elseif actionData.type == 'anim' then
+        lib.requestAnimDict(actionData.dict)
         TaskPlayAnim(cache.ped, actionData.dict, actionData.name, 8.0, -8.0, -1, 1, 0, false, false, false)
+        RemoveAnimDict(actionData.dict)
     end
 end
 
@@ -113,9 +115,9 @@ local function playSit(entity, seat)
             ClearPedTasks(cache.ped)
             state:set('sitting', false)
             state:set('entity', 0)
-            if state.original then
+            if state.original ~= 0 then
                 SetEntityVisible(state.original, true, false)
-                state:set('original', false)
+                state:set('original', 0)
             end
         end
     })
@@ -125,11 +127,7 @@ local function playSit(entity, seat)
 end
 
 RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
-    if not DoesEntityExist(data.entity) then
-        return
-    end
-    
-    if state.sitting or state.entity == data.entity then
+    if not DoesEntityExist(data.entity) or state.sitting then
         return
     end
 
@@ -151,12 +149,11 @@ RegisterNetEvent('mnr_sitanywhere:client:Unregister', function(netId)
     if GetInvokingResource() then return end
 
     local entity = NetworkGetEntityFromNetworkId(netId)
-    if state.clone and state.clone == entity then
-        SetEntityAsNoLongerNeeded(entity)
+    SetEntityAsNoLongerNeeded(entity)
+    if state.clone ~= 0 and state.clone == entity then
         NetworkUnregisterNetworkedEntity(entity)
         DeleteEntity(entity)
-        state:set('original', false)
-        state:set('clone', false)
+        state:set('clone', 0)
     else
         NetworkUnregisterNetworkedEntity(entity)
     end
