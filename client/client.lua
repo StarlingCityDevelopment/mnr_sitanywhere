@@ -70,12 +70,12 @@ end
 
 local function execAction(action, coords, heading)
     SetEntityCoords(cache.ped, coords.x, coords.y, coords.z, true, false, false, false)
-    
+
     local actionData = actions[action]
     if actionData.type == 'scenario' then
         TaskStartScenarioAtPosition(cache.ped, actionData.scenario, coords.x, coords.y, coords.z, heading, 0, true, true)
     elseif actionData.type == 'anim' then
-        --TaskPlayAnim(cache.ped, actionData.dict, actionData.name, 1.0, 1.0, 1, 1, 1.0, false, false, false)
+        TaskPlayAnim(cache.ped, actionData.dict, actionData.name, 8.0, -8.0, -1, 1, 0, false, false, false)
     end
 end
 
