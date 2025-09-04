@@ -1,0 +1,11 @@
+{
+    "notify": {
+        "seat-occupied": "Le siège est déjà occupé"
+    },
+    "textui": {
+        "sit": "[E] Lève-toi"
+    },
+    "target": {
+        "sit": "Assieds-toi"
+    }
+}

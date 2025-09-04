@@ -1,0 +1,11 @@
+{
+    "notify": {
+        "seat-occupied": "Sedadlo je již obsazené"
+    },
+    "textui": {
+        "sit": "[E] Vstát"
+    },
+    "target": {
+        "sit": "Sednout si"
+    }
+}
