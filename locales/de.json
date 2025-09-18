@@ -1,5 +1,5 @@
 {
-    "notify_seat_occupied": "Der Sitzplatz ist bereits besetzt",
+    "notify_seat_occupied": "Der Sitz ist bereits besetzt",
     "textui_sit": "[E] Aufstehen",
     "target_sit": "Hinsetzen"
 }
