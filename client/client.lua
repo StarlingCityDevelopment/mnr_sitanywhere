@@ -32,8 +32,7 @@ local function networkChair(entity)
         return false, nil
     end
 
-    local isLocal = NetworkGetEntityIsLocal(entity)
-    if isLocal then
+    if not NetworkGetEntityIsNetworked(entity) then
         NetworkRegisterEntityAsNetworked(entity)
     end
 
