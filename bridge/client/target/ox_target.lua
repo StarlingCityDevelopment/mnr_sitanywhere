@@ -7,7 +7,7 @@ target = {}
 function target.AddModels(models)
     exports.ox_target:addModel(models, {
         {
-            label = locale('target.sit'),
+            label = locale('target_sit'),
             name = 'mnr_sitanywhere:sit',
             icon = 'fa-solid fa-chair',
             distance = 3.0,

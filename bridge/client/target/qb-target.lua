@@ -8,7 +8,7 @@ function target.AddModels(models)
     exports['qb-target']:AddTargetModel(models, {
         options = {
             {
-                label = locale('target.sit'),
+                label = locale('target_sit'),
                 icon = 'fa-solid fa-chair',
                 canInteract = function(entity)
                     return DoesEntityExist(entity) and not cache.vehicle

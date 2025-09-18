@@ -1,11 +1,5 @@
 {
-    "notify": {
-        "seat-occupied": "Il posto è già occupato"
-    },
-    "textui": {
-        "sit": "[E] Alzati"
-    },
-    "target": {
-        "sit": "Siediti"
-    }
+    "notify_seat_occupied": "Il posto è già occupato",
+    "textui_sit": "[E] Alzati",
+    "target_sit": "Siediti"
 }

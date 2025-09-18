@@ -122,7 +122,7 @@ local function playSit(entity, seat)
         end
     })
 
-    lib.showTextUI(locale('textui.sit'))
+    lib.showTextUI(locale('textui_sit'))
     keybind:disable(false)
 end
 
@@ -138,7 +138,7 @@ RegisterNetEvent('mnr_sitanywhere:client:Sit', function(data)
 
     local seat = occupied(entity)
     if not seat then
-        client.Notify(locale('notify.seat-occupied'), 'error')
+        client.Notify(locale('notify_seat_occupied'), 'error')
         return
     end
 
