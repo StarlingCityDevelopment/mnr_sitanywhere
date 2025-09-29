@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "The seat is already occupied",
-    "textui_sit": "[E] Get Up",
+    "textui_sit": "[%s] Get Up",
     "target_sit": "Sit"
 }

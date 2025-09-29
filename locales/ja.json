@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "席はすでに使用されています",
-    "textui_sit": "[E] 立ち上がる",
+    "textui_sit": "[%s] 立ち上がる",
     "target_sit": "座る"
 }

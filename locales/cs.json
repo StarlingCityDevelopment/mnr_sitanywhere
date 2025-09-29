@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Sedadlo je již obsazené",
-    "textui_sit": "[E] Vstát",
+    "textui_sit": "[%s] Vstát",
     "target_sit": "Sednout si"
 }

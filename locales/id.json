@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Kursi sudah ditempati",
-    "textui_sit": "[E] Berdiri",
+    "textui_sit": "[%s] Berdiri",
     "target_sit": "Duduk"
 }

@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "सीट पहले से ही भरी हुई है",
-    "textui_sit": "[E] उठो",
+    "textui_sit": "[%s] उठो",
     "target_sit": "बैठो"
 }

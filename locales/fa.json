@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "صندلی قبلاً اشغال شده است",
-    "textui_sit": "[E] بلند شو",
+    "textui_sit": "[%s] بلند شو",
     "target_sit": "بنشین"
 }

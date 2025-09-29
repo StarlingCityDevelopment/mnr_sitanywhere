@@ -1,4 +1,4 @@
-local models = lib.load('config.config')
+local models = lib.load('config.models')
 local occupied = {}
 
 lib.callback.register('mnr_sitanywhere:server:Occupy', function(source, netId, seat)
@@ -51,6 +51,6 @@ lib.callback.register('mnr_sitanywhere:server:GetFree', function(source, netId, 
             return i
         end
     end
-    
+
     return false
 end)

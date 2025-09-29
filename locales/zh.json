@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "座位已被占用",
-    "textui_sit": "[E] 站起来",
+    "textui_sit": "[%s] 站起来",
     "target_sit": "坐下"
 }

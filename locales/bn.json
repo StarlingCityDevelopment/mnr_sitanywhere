@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "আসনটি ইতিমধ্যেই দখল করা হয়েছে",
-    "textui_sit": "[E] উঠে দাঁড়ান",
+    "textui_sit": "[%s] উঠে দাঁড়ান",
     "target_sit": "বসুন"
 }
