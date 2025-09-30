@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "좌석이 이미 점유되었습니다",
-    "textui_sit": "[E] 일어서기",
+    "textui_sit": "[%s] 일어서기",
     "target_sit": "앉기"
 }

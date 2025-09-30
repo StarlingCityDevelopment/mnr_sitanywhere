@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Il posto è già occupato",
-    "textui_sit": "[E] Alzati",
+    "textui_sit": "[%s] Alzati",
     "target_sit": "Siediti"
 }

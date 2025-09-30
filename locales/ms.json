@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Tempat duduk sudah ditempati",
-    "textui_sit": "[E] Berdiri",
+    "textui_sit": "[%s] Berdiri",
     "target_sit": "Duduk"
 }

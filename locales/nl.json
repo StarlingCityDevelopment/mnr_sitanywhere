@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "De stoel is al bezet",
-    "textui_sit": "[E] Opstaan",
+    "textui_sit": "[%s] Opstaan",
     "target_sit": "Zitten"
 }

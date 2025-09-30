@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "المقعد مشغول بالفعل",
-    "textui_sit": "[E] انهض",
+    "textui_sit": "[%s] انهض",
     "target_sit": "اجلس"
 }

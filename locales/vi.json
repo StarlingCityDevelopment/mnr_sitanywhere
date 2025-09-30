@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Chỗ ngồi đã có người",
-    "textui_sit": "[E] Đứng lên",
+    "textui_sit": "[%s] Đứng lên",
     "target_sit": "Ngồi xuống"
 }

@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Istuimen on jo varattu",
-    "textui_sit": "[E] Nouse ylös",
+    "textui_sit": "[%s] Nouse ylös",
     "target_sit": "Istu alas"
 }

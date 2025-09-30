@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Sædet er allerede optaget",
-    "textui_sit": "[E] Rejs dig",
+    "textui_sit": "[%s] Rejs dig",
     "target_sit": "Sæt dig"
 }

@@ -1,5 +1,5 @@
 {
     "notify_seat_occupied": "Місце вже зайнято",
-    "textui_sit": "[E] Встати",
+    "textui_sit": "[%s] Встати",
     "target_sit": "Сісти"
 }
