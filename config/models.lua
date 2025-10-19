@@ -1,4 +1,32 @@
 return {
+	[`p_armchair_01_s`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.1, 0.5, 180.0),
+		},
+	},
+	[`p_clb_officechair_s`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`p_dinechair_01_s`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`p_ilev_p_easychair_s`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.55, 180.0),
+		},
+	},
 	[`p_yacht_chair_01_s`] = {
 		maxSeats = 1,
 		action = 'bench',
@@ -232,34 +260,6 @@ return {
 			[1] = vec4(0.0, 0.0, 0.5, 180.0),
 		},
 	},
-	[`prop_off_chair_01`] = {
-		maxSeats = 1,
-		action = 'bench',
-		seats = {
-			[1] = vec4(0.0, 0.0, 0.5, 180.0),
-		},
-	},
-	[`prop_off_chair_04_s`] = {
-		maxSeats = 1,
-		action = 'bench',
-		seats = {
-			[1] = vec4(0.0, 0.0, 0.5, 180.0),
-		},
-	},
-	[`prop_old_deck_chair`] = {
-		maxSeats = 1,
-		action = 'bench',
-		seats = {
-			[1] = vec4(0.0, 0.0, -0.1, 180.0),
-		},
-	},
-	[`prop_old_wood_chair`] = {
-		maxSeats = 1,
-		action = 'bench',
-		seats = {
-			[1] = vec4(0.0, 0.0, 0.1, 180.0),
-		},
-	},
 	[`prop_direct_chair_01`] = {
 		maxSeats = 1,
 		action = 'bench',
@@ -281,11 +281,109 @@ return {
 			[1] = vec4(0.0, 0.0, 0.0, 180.0),
 		},
 	},
+	[`hei_prop_hei_skid_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.1, 180.0),
+		},
+	},
+	[`hei_prop_heist_off_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`prop_ld_farm_chair01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.1, 0.0, 0.0),
+		},
+	},
+	[`prop_off_chair_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`prop_off_chair_03`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.45, 180.0),
+		},
+	},
+	[`prop_off_chair_04`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.45, 180.0),
+		},
+	},
+	[`prop_off_chair_04_s`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`prop_off_chair_05`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.45, 180.0),
+		},
+	},
+	[`prop_old_deck_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, -0.1, 180.0),
+		},
+	},
+	[`prop_old_wood_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.1, 180.0),
+		},
+	},
 	[`prop_rock_chair_01`] = {
 		maxSeats = 1,
 		action = 'bench',
 		seats = {
 			[1] = vec4(0.0, 0.0, 0.1, 180.0),
+		},
+	},
+	[`prop_skid_chair_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.1, 180.0),
+		},
+	},
+	[`prop_skid_chair_02`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.1, 180.0),
+		},
+	},
+	[`prop_skid_chair_03`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.1, 180.0),
+		},
+	},
+	[`prop_sol_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
 		},
 	},
 	[`prop_table_01_chr_a`] = {
@@ -315,6 +413,62 @@ return {
 		seats = {
 			[1] = vec4(-0.3, -0.05, 0.0, 180.0),
 			[2] = vec4(0.3, -0.05, 0.0, 180.0),
+		},
+	},
+	[`v_club_officechair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`v_corp_bk_chair3`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`v_corp_cd_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`v_corp_offchair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`v_ilev_chair02_ped`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.0, 180.0),
+		},
+	},
+	[`v_ilev_hd_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.65, 180.0),
+		},
+	},
+	[`v_ilev_m_dinechair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`v_ilev_p_easychair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.55, 180.0),
 		},
 	},
 	[`v_ret_gc_chair03`] = {
