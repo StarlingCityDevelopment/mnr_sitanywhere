@@ -511,6 +511,21 @@ return {
 			[2] = vec4(0.3, -0.05, 0.0, 180.0),
 		},
 	},
+	[`sf_prop_sf_sofa_chefield_01a`] = {
+		maxSeats = 2,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.4, 0.0, 0.5, 180.0),
+			[2] = vec4(-0.4, 0.0, 0.5, 180.0),
+		},
+	},
+	[`sf_prop_sf_sofa_chefield_02a`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
 	[`v_club_officechair`] = {
 		maxSeats = 1,
 		action = 'bench',
