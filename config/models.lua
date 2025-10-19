@@ -34,6 +34,14 @@ return {
 			[1] = vec4(0.0, 0.0, 0.0, 180.0),
 		},
 	},
+	[`p_yacht_sofa_01_s`] = {
+		maxSeats = 2,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.4, 0.0, 0.0, 180.0),
+			[2] = vec4(-0.4, 0.0, 0.0, 180.0),
+		},
+	},
 	[`prop_armchair_01`] = {
 		maxSeats = 1,
 		action = 'bench',
@@ -302,6 +310,28 @@ return {
 			[1] = vec4(0.0, 0.0, 0.5, 180.0),
 		},
 	},
+	[`hei_prop_yah_seat_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.6, 180.0),
+		},
+	},
+	[`hei_prop_yah_seat_02`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.6, 180.0),
+		},
+	},
+	[`hei_prop_yah_seat_03`] = {
+		maxSeats = 2,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.4, 0.0, 0.6, 180.0),
+			[2] = vec4(-0.4, 0.0, 0.6, 180.0),
+		},
+	},
 	[`prop_ld_farm_chair01`] = {
 		maxSeats = 1,
 		action = 'bench',
@@ -402,10 +432,18 @@ return {
 	},
 	[`prop_t_sofa`] = {
 		maxSeats = 2,
-		action = 'bench',
+		action = 'sunlounger',
 		seats = {
-			[1] = vec4(-0.5, -0.5, 0.1, 180.0),
-			[2] = vec4(0.5, -0.5, 0.1, 180.0),
+			[1] = vec4(0.5, 0.15, 0.05, 180.0),
+			[2] = vec4(-0.5, 0.0, 0.05, 180.0),
+		},
+	},
+	[`prop_t_sofa_02`] = {
+		maxSeats = 2,
+		action = 'sunlounger',
+		seats = {
+			[1] = vec4(0.5, 0.0, 0.05, 180.0),
+			[2] = vec4(-0.5, -0.1, 0.05, 180.0),
 		},
 	},
 	[`prop_table_01_chr_a`] = {
@@ -427,6 +465,35 @@ return {
 		action = 'bench',
 		seats = {
 			[1] = vec4(0.0, 0.1, 0.25, 180.0),
+		},
+	},
+	[`prop_waiting_seat_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`prop_yacht_seat_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.6, 180.0),
+		},
+	},
+	[`prop_yacht_seat_02`] = {
+		maxSeats = 2,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.4, 0.0, 0.6, 180.0),
+			[2] = vec4(-0.4, 0.0, 0.6, 180.0),
+		},
+	},
+	[`prop_yacht_seat_03`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.6, 180.0),
 		},
 	},
 	[`prop_yaught_chair_01`] = {
@@ -519,6 +586,22 @@ return {
 		action = 'bench',
 		seats = {
 			[1] = vec4(0.0, 0.0, -0.1, 180.0),
+		},
+	},
+	[`v_tre_sofa_mess_b_s`] = {
+		maxSeats = 2,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.5, 0.0, 0.5, 180.0),
+			[2] = vec4(-0.5, 0.0, 0.5, 180.0),
+		},
+	},
+	[`v_tre_sofa_mess_c_s`] = {
+		maxSeats = 2,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.5, 0.0, 0.5, 180.0),
+			[2] = vec4(-0.5, 0.0, 0.5, 180.0),
 		},
 	},
 	---@description Paste the presets here 🔽 [https://github.com/Monarch-Development/monarch_presets]
