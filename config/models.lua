@@ -41,6 +41,13 @@ return {
 			[1] = vec4(0.0, 0.0, 0.5, 180.0),
 		},
 	},
+	[`prop_bar_stool_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.1, 0.8, 180.0),
+		},
+	},
 	[`prop_bench_01a`] = {
 		maxSeats = 3,
 		action = 'bench',
@@ -386,6 +393,21 @@ return {
 			[1] = vec4(0.0, 0.0, 0.5, 180.0),
 		},
 	},
+	[`prop_stool_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.1, 0.8, 180.0),
+		},
+	},
+	[`prop_t_sofa`] = {
+		maxSeats = 2,
+		action = 'bench',
+		seats = {
+			[1] = vec4(-0.5, -0.5, 0.1, 180.0),
+			[2] = vec4(0.5, -0.5, 0.1, 180.0),
+		},
+	},
 	[`prop_table_01_chr_a`] = {
 		maxSeats = 1,
 		action = 'bench',
@@ -398,6 +420,13 @@ return {
 		action = 'bench',
 		seats = {
 			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`prop_ven_market_stool`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.1, 0.25, 180.0),
 		},
 	},
 	[`prop_yaught_chair_01`] = {
@@ -450,6 +479,13 @@ return {
 			[1] = vec4(0.0, 0.0, 0.0, 180.0),
 		},
 	},
+	[`v_ilev_fh_kitchenstool`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.1, 0.9, 180.0),
+		},
+	},
 	[`v_ilev_hd_chair`] = {
 		maxSeats = 1,
 		action = 'bench',
@@ -469,6 +505,13 @@ return {
 		action = 'bench',
 		seats = {
 			[1] = vec4(0.0, 0.0, 0.55, 180.0),
+		},
+	},
+	[`v_ilev_tort_stool`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.1, 0.15, 180.0),
 		},
 	},
 	[`v_ret_gc_chair03`] = {
