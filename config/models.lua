@@ -1,4 +1,32 @@
 return {
+	[`apa_mp_h_din_chair_04`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`apa_mp_h_din_chair_08`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`apa_mp_h_din_chair_09`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.1, 0.5, 180.0),
+		},
+	},
+	[`apa_mp_h_din_chair_12`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
 	[`apa_mp_h_stn_chairarm_01`] = {
 		maxSeats = 1,
 		action = 'bench',
@@ -133,6 +161,97 @@ return {
 		},
 	},
 	[`apa_mp_h_stn_chairstrip_08`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.1, 0.5, 180.0),
+		},
+	},
+	[`apa_mp_h_yacht_armchair_03`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.1, 0.5, 180.0),
+		},
+	},
+	[`apa_mp_h_yacht_armchair_04`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.1, 0.5, 180.0),
+		},
+	},
+	[`apa_mp_h_yacht_strip_chair_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.2, 0.5, 180.0),
+		},
+	},
+	[`ba_prop_battle_club_chair_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.05, -0.08, 180.0),
+		},
+	},
+	[`ba_prop_battle_club_chair_02`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, -0.1, 180.0),
+		},
+	},
+	[`ba_prop_battle_club_chair_03`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, -0.1, 180.0),
+		},
+	},
+	[`bkr_int_02_chair_bar_table_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.4, 180.0),
+		},
+	},
+	[`bkr_int_02_chair_bar_table_02`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.4, 180.0),
+		},
+	},
+	[`bkr_int_02_strip_chair`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.1, 0.5, 180.0),
+		},
+	},
+	[`bkr_prop_biker_boardchair01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, -0.1, 180.0),
+		},
+	},
+	[`bkr_prop_biker_chair_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, 0.0, 0.5, 180.0),
+		},
+	},
+	[`bkr_prop_biker_chairstrip_01`] = {
+		maxSeats = 1,
+		action = 'bench',
+		seats = {
+			[1] = vec4(0.0, -0.1, 0.5, 180.0),
+		},
+	},
+	[`bkr_prop_biker_chairstrip_02`] = {
 		maxSeats = 1,
 		action = 'bench',
 		seats = {
@@ -897,43 +1016,26 @@ return {
 	---@description Paste the presets here 🔼 [https://github.com/Monarch-Development/monarch_presets]
 }
 
--- apa_chairstrip_0x
--- apa_mp_h_din_chair_04
--- apa_mp_h_din_chair_08
--- apa_mp_h_din_chair_09
--- apa_mp_h_din_chair_12
--- apa_mp_h_yacht_armchair_03
--- apa_mp_h_yacht_armchair_04
--- apa_mp_h_yacht_strip_chair_01
--- apa_mpa2_chairarm
--- apa_mpa2_din_chair_00
--- apa_mpa2_din_chair_01
--- apa_mpa2_din_chair_02
--- apa_mpa2_din_chair_03
--- apa_mpa2_din_chair_04
--- apa_mpa2_din_chair_05
--- apa_mpa2_din_chair_06
--- apa_mpa2_din_chair_07
--- apa_mpa6_chairarm
--- apa_mpa6_din_chair_00
--- apa_mpa6_din_chair_01
--- apa_mpa6_din_chair_02
--- apa_mpa6_din_chair_03
--- apa_mpa6_din_chair_04
--- apa_mpa6_din_chair_05
--- apa_mpa6_din_chair_06
--- apa_mpa6_din_chair_07
+-- apa_chairstrip_0x (???)
+-- apa_mpa2_chairarm (???)
+-- apa_mpa2_din_chair_00 (???)
+-- apa_mpa2_din_chair_01 (???)
+-- apa_mpa2_din_chair_02 (???)
+-- apa_mpa2_din_chair_03 (???)
+-- apa_mpa2_din_chair_04 (???)
+-- apa_mpa2_din_chair_05 (???)
+-- apa_mpa2_din_chair_06 (???)
+-- apa_mpa2_din_chair_07 (???)
+-- apa_mpa6_chairarm (???)
+-- apa_mpa6_din_chair_00 (???)
+-- apa_mpa6_din_chair_01 (???)
+-- apa_mpa6_din_chair_02 (???)
+-- apa_mpa6_din_chair_03 (???)
+-- apa_mpa6_din_chair_04 (???)
+-- apa_mpa6_din_chair_05 (???)
+-- apa_mpa6_din_chair_06 (???)
+-- apa_mpa6_din_chair_07 (???)
 
--- ba_prop_battle_club_chair_01
--- ba_prop_battle_club_chair_02
--- ba_prop_battle_club_chair_03
--- bkr_int_02_chair_bar_table_01
--- bkr_int_02_chair_bar_table_02
--- bkr_int_02_strip_chair
--- bkr_prop_biker_boardchair01
--- bkr_prop_biker_chair_01
--- bkr_prop_biker_chairstrip_01
--- bkr_prop_biker_chairstrip_02
 -- bkr_prop_clubhouse_armchair_01a
 -- bkr_prop_clubhouse_chair_01
 -- bkr_prop_clubhouse_chair_03
