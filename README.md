@@ -11,8 +11,8 @@ Optimized and simple resource that makes benches and chairs interactable
 - Player animation done with scenario (no bugs like anims)
 
 ## Presets
-- [Presets](https://github.com/Monarch-Development/monarch_presets)
+- [Presets](https://github.com/Monarch-Devs/monarch_presets)
 
 ## Links
 - [Discord](https://discord.gg/WKtk65yBC6)
-- [Docs](https://monarch-development.pages.dev/docs/monarch-resources/mnr_sitanywhere)
+- [Docs](https://monarch-devs.com/docs/monarch-resources/mnr_sitanywhere)
