@@ -1,3 +1,3 @@
 return {
-    key = 'X',
+	key = "X",
 }
